@@ -6,7 +6,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>To-Do list</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="./css/style.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@200;300;400;500&display=swap" rel="stylesheet">
@@ -23,43 +22,92 @@
             <main>
                 <!--left side-->
                 <div id="sidebar">
+
                     <!--user bar-->
                     <section class="user_bar">
                         <div class="user">
-                            <div class="user_img"></div>
-                            <div class="user_name"></div>
+                            <div class="user_img">
+                                <img src="./img/avatar_io.jpg" alt="main_user_avatar">
+                            </div>
+                            <div class="user_name">Sofia</div>
                         </div>
                         <div class="sidebar_menu">
-                            <a href=""></a>
-                            <a href=""></a>
-                            <a href=""></a>
+                            <a href=""><i class="fa-solid fa-circle-notch"></i></a>
+                            <a href=""><i class="fa-solid fa-message"></i></a>
+                            <a href=""><i class="fa-solid fa-ellipsis-vertical"></i></a>
                         </div>
                     </section>
                     <section id="desktop_alert">
+                        <div class="alert">
+                            <i class="fa-solid fa-bell-slash" style="color: #8edafc;"></i>
+                        </div>
+                        <div>
+                            <p>Ricevi notifiche di nuovi messaggi</p>
+                            <a href="">Attiva notifiche desktop</a>
+                        </div>
                     </section>
+
                     <!--search-->
-                    <section id="search"></section>
+                    <section id="search">
+                        <button type="submit" id="submit_search"><i class="fa-solid fa-magnifying-glass"></i></button>
+                        <input type="search" id="search_contact" name="search" placeholder="Cerca o inizia una nuova conversazione">
+                    </section>
+
                     <!--contacts-->
-                    <section id="contacts"></section>
+                    <section id="contacts">
+                        <div class="contact_box" v-for="(contact,index) in contacts" :class="activeContact === index ? 'active' : ''" @click="activate(index)">
+                            <div class="user_img">
+                                <img  :src="contact.avatar" alt="main_user_avatar">
+                            </div>
+                            <div id="contact_info">
+                                <p class="user_name">{{contact.name}}</p>
+                                <span class="last_message">Ultimo messaggio inviato</span>
+                            </div>
+                        </div>
+                    </section>
                 </div>
+
                 <!--right side-->
                 <div id="main_content">
+
                     <!--messaged user bar-->
                     <section class="user_bar">
                         <div class="user_bar">
                             <div class="user">
-                                <div class="user_img"></div>
-                                <div class="user_name"></div>
+                                <div class="user_img">
+                                    <img :src="contacts[activeContact].avatar" alt="">
+                                </div>
+                                <div>
+                                    <p class="user_name">Michele</p>
+                                    <span class="last_access">Ultimo accesso di recente</span>
+                                </div>
                             </div>
                             <div class="sidebar_menu">
-                                <a href=""></a>
+                                <a href=""></i></a>
                                 <a href=""></a>
                                 <a href=""></a>
                     </section>
+
                     <!--message board-->
-                    <section id="message_board"></section>
+                    <section id="message_board">
+                        <div id="chat_container"  >
+
+                            <div v-for="storico_messaggi in contacts[activeContact].messages" :class="storico_messaggi.status=== 'sent' ? 'message_sendt' : 'message_received'">
+                                <p>{{storico_messaggi.message}}</p><label>{{storico_messaggi.date.substring(11,16)}}</label>
+                            </div>
+                        </div>
+                    </section>
+
                     <!--message imput-->
-                    <section id="messagging"></section>
+                    <section id="messagging">
+                        <button id="emoji">
+                            <i class="fa-regular fa-face-smile"></i>
+                        </button>
+                        <input v-model="newMessage" type="text" id="input_message" placeholder="Scrivi un messaggio" @keyup.enter="sendMessage(activeContact, newMessage)">
+                        <button id="vocal_record">
+                            <i class="fa-solid fa-microphone"></i>
+                        </button>
+                    </section>
                 </div>
             </main>
         </div>

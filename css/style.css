@@ -1,0 +1,101 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    background: linear-gradient( rgba(0,150,136) 0vh 15vh, rgba(218,219,210) 15vh 100vh);
+    background: -webkit-linear-gradient( rgba(0,150,136) 0vh 15vh, rgba(218,219,210) 15vh 100vh);
+    background: -o-linear-gradient( rgba(0,150,136) 0vh 15vh, rgba(218,219,210) 15vh 100vh);
+    background: -moz-linear-gradient( rgba(0,150,136) 0vh 15vh, rgba(218,219,210) 15vh 100vh);
+    height: 100vh;
+}
+
+/* main container */
+#boolzap_container{
+    width: 1600px;
+    height: 96vh;
+    background-color: red;
+    position: relative;
+    top: 2vh;
+    margin: 0 auto;
+    bottom: 2vh;
+}
+
+/* son containers */
+#sidebar, #main_content{
+    position: absolute;
+    top: 0px;
+    bottom: 0px;
+    padding-top: 75px;
+    display: flex;
+    flex-direction: column;
+}
+
+#sidebar{
+    width: 35%;
+    background-color: blue;
+    left: 0px;
+}
+
+#main_content{
+    width: 65%;
+    background-color: green;
+    left: 35%;
+}
+/*user bar*/
+.user_bar{
+    height: 75px;
+    background-color: grey;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    display: flex;
+}
+
+.user{
+    background-color: magenta;
+    width: calc(100% - 120px);
+    height: 100%;
+}
+
+.sidebar_menu{
+    width: 120px;
+    background-color: brown;
+    height: 100%;
+}
+/* left side*/
+#desktop_alert{
+    width: 100%;
+    height: 100px;
+    background-color: red;
+}
+
+#search{
+    width: 100%;
+    height: 50px;
+    background-color: rgb(64, 160, 197);
+}
+
+#contacts{
+    background-color: white;
+    width: 100%;
+    height: 100%;
+}
+
+/*right side*/
+#message_board{
+    background-color: white;
+    width: 100%;
+    height: 100%;
+}
+
+#messagging{
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    height: 75px;
+    background-color: black;
+}

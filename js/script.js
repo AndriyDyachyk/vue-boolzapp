@@ -169,27 +169,27 @@ createApp({
                 }
             ],
             newMessage:'',
-            activeContact: 0
+            activeContact: 0,
+            search: ''
         }
     },
+
     methods: {
         sendMessage(){
-        let data = new Date().toLocaleString().replace(',','')
-        
-        if(data.length < 19){
-            data = ' ' + data
-        }
+            let data = new Date().toLocaleString().replace(',','')
+            
+            if(data.length < 19){
+                data = ' ' + data
+            }
 
-        console.log(data)
 
-        let newSendtMessage ={
-            date: data,
-            message: this.newMessage,
-            status: 'sent'
-        }
+            let newSendtMessage ={
+                date: data,
+                message: this.newMessage,
+                status: 'sent'
+            }
             this.contacts[[this.activeContact]].messages.push(newSendtMessage)
             this.newMessage= '';
-            console.log(newSendtMessage)
             setTimeout(() => {
                 let response ={
                     date: data,
@@ -201,10 +201,24 @@ createApp({
         },
         activate(index){
             this.activeContact = index;
-            console.log(this.activeContact)
         },
+        searchVerify(){
+            let searchText = this.search.toLowerCase()
 
+            for(let i=0; i<this.contacts.length; i++){
+
+                let contact = this.contacts[i]
+                let lowerName = contact.name.toLowerCase()
+
+                if(lowerName.includes(searchText)){
+                    contact.visible = true
+                } else {
+                    contact.visible = false
+                }
+            } 
+        }
     }
+    
 }).mount('#app')
 
 

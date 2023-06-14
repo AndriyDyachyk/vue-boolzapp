@@ -49,13 +49,13 @@
 
                     <!--search-->
                     <section id="search">
-                        <button type="submit" id="submit_search"><i class="fa-solid fa-magnifying-glass"></i></button>
-                        <input type="search" id="search_contact" name="search" placeholder="Cerca o inizia una nuova conversazione">
+                        <button id="submit_search" @click="searchVerify()"><i class="fa-solid fa-magnifying-glass"></i></button>
+                        <input v-model="search" v-on:input="searchVerify()" type="text" placeholder="Cerca o inizia una nuova conversazione" >
                     </section>
 
                     <!--contacts-->
                     <section id="contacts">
-                        <div class="contact_box" v-for="(contact,index) in contacts" :class="activeContact === index ? 'active' : ''" @click="activate(index)">
+                        <div class="contact_box" v-for="(contact,index) in contacts" :class="activeContact === index ? 'active' : '',contact.visible === true ? 'show' : ''" @click="activate(index)">
                             <div class="user_img">
                                 <img  :src="contact.avatar" alt="main_user_avatar">
                             </div>
